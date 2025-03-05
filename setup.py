@@ -13,9 +13,9 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://swebench.com",
     project_urls={
-        "Documentation": "https://github.com/swe-bench/SWE-bench",
-        "Bug Reports": "http://github.com/swe-bench/SWE-bench/issues",
-        "Source Code": "http://github.com/swe-bench/SWE-bench",
+        "Documentation": "https://github.com/SWE-Gym/SWE-Bench-Fork",
+        "Bug Reports": "http://github.com/SWE-Gym/SWE-Bench-Fork/issues",
+        "Source Code": "http://github.com/SWE-Gym/SWE-Bench-Fork",
         "Website": "https://swebench.com",
     },
     packages=setuptools.find_packages(),

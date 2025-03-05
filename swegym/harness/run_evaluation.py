@@ -10,14 +10,14 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from tqdm import tqdm
 
-from swebench.harness.constants import (
+from swegym.harness.constants import (
     APPLY_PATCH_FAIL,
     APPLY_PATCH_PASS,
     INSTANCE_IMAGE_BUILD_DIR,
     KEY_INSTANCE_ID,
     RUN_EVALUATION_LOG_DIR,
 )
-from swebench.harness.docker_utils import (
+from swegym.harness.docker_utils import (
     remove_image,
     copy_to_container,
     exec_run_with_timeout,
@@ -26,16 +26,16 @@ from swebench.harness.docker_utils import (
     should_remove,
     clean_images,
 )
-from swebench.harness.docker_build import (
+from swegym.harness.docker_build import (
     BuildImageError,
     build_container,
     build_env_images,
     close_logger,
     setup_logger,
 )
-from swebench.harness.grading import get_eval_report
-from swebench.harness.test_spec import make_test_spec, TestSpec
-from swebench.harness.utils import load_swebench_dataset, str2bool
+from swegym.harness.grading import get_eval_report
+from swegym.harness.test_spec import make_test_spec, TestSpec
+from swegym.harness.utils import load_swebench_dataset, str2bool
 
 
 class EvaluationError(Exception):

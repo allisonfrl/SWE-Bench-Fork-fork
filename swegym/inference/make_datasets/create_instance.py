@@ -8,8 +8,8 @@ from tempfile import TemporaryDirectory
 import unidiff
 from tqdm.auto import tqdm
 
-from swebench.inference.make_datasets.tokenize_dataset import TOKENIZER_FUNCS
-from swebench.inference.make_datasets.utils import AutoContextManager, ingest_directory_contents
+from swegym.inference.make_datasets.tokenize_dataset import TOKENIZER_FUNCS
+from swegym.inference.make_datasets.utils import AutoContextManager, ingest_directory_contents
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 logger = logging.getLogger(__name__)

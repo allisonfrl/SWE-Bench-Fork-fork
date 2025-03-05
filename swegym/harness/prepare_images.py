@@ -3,11 +3,11 @@ import resource
 
 from argparse import ArgumentParser
 
-from swebench.harness.constants import KEY_INSTANCE_ID
-from swebench.harness.docker_build import build_instance_images
-from swebench.harness.docker_utils import list_images
-from swebench.harness.test_spec import make_test_spec
-from swebench.harness.utils import load_swebench_dataset, str2bool
+from swegym.harness.constants import KEY_INSTANCE_ID
+from swegym.harness.docker_build import build_instance_images
+from swegym.harness.docker_utils import list_images
+from swegym.harness.test_spec import make_test_spec
+from swegym.harness.utils import load_swebench_dataset, str2bool
 
 
 def filter_dataset_to_build(

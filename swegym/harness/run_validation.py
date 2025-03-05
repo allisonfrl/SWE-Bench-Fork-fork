@@ -11,14 +11,14 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from tqdm import tqdm
 
-from swebench.harness.constants import (
+from swegym.harness.constants import (
     APPLY_PATCH_FAIL,
     APPLY_PATCH_PASS,
     INSTANCE_IMAGE_BUILD_DIR,
     KEY_INSTANCE_ID,
     RUN_EVALUATION_LOG_DIR,
 )
-from swebench.harness.docker_utils import (
+from swegym.harness.docker_utils import (
     remove_image,
     copy_to_container,
     exec_run_with_timeout,
@@ -27,16 +27,16 @@ from swebench.harness.docker_utils import (
     should_remove,
     clean_images,
 )
-from swebench.harness.docker_build import (
+from swegym.harness.docker_build import (
     BuildImageError,
     build_container,
     build_env_images,
     close_logger,
     setup_logger,
 )
-from swebench.harness.test_spec import make_test_spec, TestSpec
-from swebench.harness.utils import load_swebench_dataset, str2bool
-from swebench.harness.grading import get_logs_eval
+from swegym.harness.test_spec import make_test_spec, TestSpec
+from swegym.harness.utils import load_swebench_dataset, str2bool
+from swegym.harness.grading import get_logs_eval
 
 
 class EvaluationError(Exception):
@@ -95,7 +95,7 @@ def get_validation_report(
         return report_map
     report_map[instance_id]["patch_successfully_applied"] = True
 
-    from swebench.harness.constants import TestStatus
+    from swegym.harness.constants import TestStatus
     report = {
         "PASS": [k for k, v in eval_sm.items() if v == TestStatus.PASSED.value],
         "FAIL": [k for k, v in eval_sm.items() if v == TestStatus.FAILED.value],

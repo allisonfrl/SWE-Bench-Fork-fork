@@ -1,17 +1,17 @@
 __version__ = "2.0.13"
 
-from swebench.collect.build_dataset import main as build_dataset
-from swebench.collect.get_tasks_pipeline import main as get_tasks_pipeline
-from swebench.collect.print_pulls import main as print_pulls
+from swegym.collect.build_dataset import main as build_dataset
+from swegym.collect.get_tasks_pipeline import main as get_tasks_pipeline
+from swegym.collect.print_pulls import main as print_pulls
 
-from swebench.harness.constants import (
+from swegym.harness.constants import (
     KEY_INSTANCE_ID,
     KEY_MODEL,
     KEY_PREDICTION,
     MAP_REPO_VERSION_TO_SPECS,
 )
 
-from swebench.harness.docker_build import (
+from swegym.harness.docker_build import (
     build_image,
     build_base_images,
     build_env_images,
@@ -21,7 +21,7 @@ from swebench.harness.docker_build import (
     setup_logger,
 )
 
-from swebench.harness.docker_utils import (
+from swegym.harness.docker_utils import (
     cleanup_container,
     remove_image,
     copy_to_container,
@@ -29,7 +29,7 @@ from swebench.harness.docker_utils import (
     list_images,
 )
 
-from swebench.harness.grading import (
+from swegym.harness.grading import (
     compute_fail_to_pass,
     compute_pass_to_pass,
     get_logs_eval,
@@ -39,31 +39,31 @@ from swebench.harness.grading import (
     TestStatus,
 )
 
-from swebench.harness.log_parsers import (
+from swegym.harness.log_parsers import (
     MAP_REPO_TO_PARSER,
 )
 
-from swebench.harness.run_evaluation import (
+from swegym.harness.run_evaluation import (
     main as run_evaluation,
 )
 
-from swebench.harness.utils import (
+from swegym.harness.utils import (
     get_environment_yml,
     get_requirements,
 )
 
-from swebench.versioning.constants import (
+from swegym.versioning.constants import (
     MAP_REPO_TO_VERSION_PATHS,
     MAP_REPO_TO_VERSION_PATTERNS,
 )
 
-from swebench.versioning.get_versions import (
+from swegym.versioning.get_versions import (
     get_version,
     map_version_to_task_instances,
     get_versions_from_build,
     get_versions_from_web,
 )
 
-from swebench.versioning.utils import (
+from swegym.versioning.utils import (
     split_instances,
 )

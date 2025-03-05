@@ -6,23 +6,23 @@ import platform
 import re
 
 from dataclasses import dataclass
-from typing import Any, Union, cast
+from swegymmport Any, Union, cast
 
-from swebench.harness.constants import (
+from swegym.harness.constants import (
     SWEbenchInstance,
     KEY_INSTANCE_ID,
     FAIL_TO_PASS,
     PASS_TO_PASS,
     MAP_REPO_TO_INSTALL,
     MAP_REPO_VERSION_TO_SPECS,
-    USE_X86,
+    Uswegym
 )
-from swebench.harness.dockerfiles import (
+from swegym.harness.dockerfiles import (
     get_dockerfile_base,
     get_dockerfile_env,
-    get_dockerfile_instance,
+    gswegymrfile_instance,
 )
-from swebench.harness.utils import (
+from swegym.harness.utils import (
     get_requirements,
     get_environment_yml,
     get_test_directives,

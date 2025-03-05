@@ -902,25 +902,271 @@ SPECS_PYDICOM.update(
 
 SPECS_HUMANEVAL = {k: {"python": "3.9", "test_cmd": "python"} for k in ["1.0"]}
 
+# MYPY
+TEST_MYPY = "pytest -rA -k"
+SPECS_MYPY = {
+    k: {
+        "pre_install": [
+            "git submodule update --init mypy/typeshed || true",
+        ],
+        "python": "3.12",
+        "install": "python -m pip install -r test-requirements.txt; python -m pip install -e .; hash -r",
+        "test_cmd": TEST_MYPY
+    }
+    for k in ["1.7","1.8","1.9", "1.10", "1.11"]
+}
+
+SPECS_MYPY.update(
+    {
+        k: {
+            "pre_install": [
+                "git submodule update --init mypy/typeshed || true",
+            ],
+            "python": "3.11",
+            "install": "python -m pip install -r test-requirements.txt; python -m pip install -e .; hash -r",
+            "test_cmd": "pytest -n0 -rA -k"
+        }
+        for k in ["1.6", "1.5", "1.4", "1.3", "1.2", "1.1", "1.0"]
+    }
+)
+
+SPECS_MYPY.update(
+    {
+        k: {
+            "pre_install": [
+                "git submodule update --init mypy/typeshed || true",
+            ],
+            "python": "3.10",
+            "install": "python -m pip install -r test-requirements.txt; python -m pip install -e .; pip install pytest pytest-xdist; hash -r",
+            "test_cmd": "pytest -n0 -rA -k"
+        }
+        for k in ["0.991", "0.990", "0.982", "0.981", "0.980", "0.971", "0.970", "0.961", "0.960", "0.950", "0.942", "0.941", "0.940", "0.931", "0.930", "0.920", "0.910", "0.902", "0.901", "0.900"]
+    }
+)
+
+SPECS_MYPY.update(
+    {
+        k: {
+            "pre_install": [
+                "git submodule update --init mypy/typeshed || true",
+                "sed -i '1i types-typing-extensions==3.7.3' test-requirements.txt"
+            ],
+            "python": "3.9",
+            "install": "python -m pip install -r test-requirements.txt; python -m pip install -e .; pip install pytest pytest-xdist; hash -r;",
+            "test_cmd": "pytest -n0 -rA -k"
+        }
+        for k in ["0.890", "0.880", "0.870", "0.860", "0.850", "0.840", "0.830", "0.820", "0.812", "0.811", "0.810", "0.800", "0.790", "0.782", "0.781", "0.780", "0.770", "0.761", "0.760", "0.750", "0.740", "0.730", "0.720", "0.711", "0.710", "0.701", "0.700"]
+    }
+)
+
+# MOTO
+TEST_MOTO = "pytest -n0 -rA"
+SPECS_MOTO = {
+    k: {
+        "python": "3.12",
+        "install": "make init",
+        "test_cmd": TEST_MOTO,
+    }
+    for k in ["4.2", "4.1", "4.0"]
+}
+
+SPECS_MOTO.update(
+    {
+        k: {
+            "python": "3.11",
+            "install": "make init",
+            "test_cmd": TEST_MOTO,
+        }
+        for k in ["3.1", "3.0", "2.3", "2.2", "2.1", "2.0"]
+    }
+)
+
+SPECS_MOTO.update(
+    {
+        k: {
+            "python": "3.10",
+            "install": "make init",
+            "test_cmd": TEST_MOTO,
+        }
+        for k in ["1.3", "1.2", "1.1", "1.0"]
+    }
+)
+
+# CONAN
+TEST_CONAN = "python -m pytest -xvs"
+SPECS_CONAN = {
+    k: {
+        "python": "3.12",
+        "install": "python -m pip install -e .; python -m pip install -r conans/requirements_dev.txt",
+        "test_cmd": TEST_CONAN,
+    }
+    for k in ["2.0"]
+}
+
+SPECS_CONAN.update(
+    {
+        k: {
+            "python": "3.11",
+            "install": "python -m pip install -e .; python -m pip install -r conans/requirements_dev.txt",
+            "test_cmd": TEST_CONAN,
+        }
+        for k in ["1.60", "1.59", "1.58", "1.57", "1.56", "1.55", "1.54", "1.53", "1.52", "1.51", "1.50"]
+    }
+)
+
+SPECS_CONAN.update(
+    {
+        k: {
+            "python": "3.10",
+            "install": "python -m pip install -e .; python -m pip install -r conans/requirements_dev.txt",
+            "test_cmd": TEST_CONAN,
+        }
+        for k in ["1.49", "1.48", "1.47", "1.46", "1.45", "1.44", "1.43", "1.42", "1.41", "1.40"]
+    }
+)
+
+# DASK
+TEST_DASK = "pytest -xvs"
+SPECS_DASK = {
+    k: {
+        "python": "3.12",
+        "install": "python -m pip install -e .[test]",
+        "test_cmd": TEST_DASK,
+    }
+    for k in ["2023.5", "2023.4", "2023.3", "2023.2", "2023.1", "2022.12", "2022.11", "2022.10", "2022.9", "2022.8", "2022.7", "2022.6", "2022.5", "2022.4", "2022.3", "2022.2", "2022.1", "2021.12", "2021.11", "2021.10", "2021.9", "2021.8", "2021.7", "2021.6", "2021.5", "2021.4", "2021.3", "2021.2", "2021.1", "2020.12", "2020.11", "2020.10", "2020.9", "2020.8", "2020.7", "2020.6", "2020.5", "2020.4", "2020.3", "2020.2", "2020.1", "2019.12", "2019.11", "2019.10", "2019.9", "2019.8", "2019.7", "2019.6", "2019.5", "2019.4", "2019.3", "2019.2", "2019.1", "1.2", "1.1", "1.0", "0.20", "0.19", "0.18", "0.17", "0.16", "0.15", "0.14", "0.13", "0.12", "0.11", "0.10", "0.9", "0.8", "0.7", "0.6", "0.5", "0.4", "0.3", "0.2", "0.1"]
+}
+
+# MONAI
+TEST_MONAI = "python -m tests.min_tests"
+SPECS_MONAI = {
+    k: {
+        "python": "3.12",
+        "install": "python -m pip install -e .[all]",
+        "test_cmd": TEST_MONAI,
+    }
+    for k in ["1.2", "1.1", "1.0", "0.9", "0.8", "0.7", "0.6", "0.5", "0.4", "0.3", "0.2", "0.1"]
+}
+
+# DVC
+TEST_DVC = "python -m pytest -xvs"
+SPECS_DVC = {
+    k: {
+        "python": "3.12",
+        "install": "python -m pip install -e .[all]",
+        "test_cmd": TEST_DVC,
+    }
+    for k in ["3.30", "3.29", "3.28", "3.27", "3.26", "3.25", "3.24", "3.23", "3.22", "3.21", "3.20", "3.19", "3.18", "3.17", "3.16", "3.15", "3.14", "3.13", "3.12", "3.11", "3.10", "3.9", "3.8", "3.7", "3.6", "3.5", "3.4", "3.3", "3.2", "3.1", "3.0", "2.58", "2.57", "2.56", "2.55", "2.54", "2.53", "2.52", "2.51", "2.50", "2.49", "2.48", "2.47", "2.46", "2.45", "2.44", "2.43", "2.42", "2.41", "2.40", "2.39", "2.38", "2.37", "2.36", "2.35", "2.34", "2.33", "2.32", "2.31", "2.30", "2.29", "2.28", "2.27", "2.26", "2.25", "2.24", "2.23", "2.22", "2.21", "2.20", "2.19", "2.18", "2.17", "2.16", "2.15", "2.14", "2.13", "2.12", "2.11", "2.10", "2.9", "2.8", "2.7", "2.6", "2.5", "2.4", "2.3", "2.2", "2.1", "2.0", "1.12", "1.11", "1.10", "1.9", "1.8", "1.7", "1.6", "1.5", "1.4", "1.3", "1.2", "1.1", "1.0", "0.94", "0.93", "0.92", "0.91", "0.90", "0.89", "0.88", "0.87", "0.86", "0.85", "0.84", "0.83", "0.82", "0.81", "0.80", "0.79", "0.78", "0.77", "0.76", "0.75", "0.74", "0.73", "0.72", "0.71", "0.70", "0.69", "0.68", "0.67", "0.66", "0.65", "0.64", "0.63", "0.62", "0.61", "0.60", "0.59", "0.58", "0.57", "0.56", "0.55", "0.54", "0.53", "0.52", "0.51", "0.50", "0.49", "0.48", "0.47", "0.46", "0.45", "0.44", "0.43", "0.42", "0.41", "0.40", "0.39", "0.38", "0.37", "0.36", "0.35", "0.34", "0.33", "0.32", "0.31", "0.30", "0.29", "0.28", "0.27", "0.26", "0.25", "0.24", "0.23", "0.22", "0.21", "0.20", "0.19", "0.18", "0.17", "0.16", "0.15", "0.14", "0.13", "0.12", "0.11", "0.10", "0.9", "0.8", "0.7", "0.6", "0.5", "0.4", "0.3", "0.2", "0.1"]
+}
+
+# BOKEH
+TEST_BOKEH = "python -m pytest -xvs"
+SPECS_BOKEH = {
+    k: {
+        "python": "3.12",
+        "install": "python -m pip install -e .",
+        "test_cmd": TEST_BOKEH,
+    }
+    for k in ["3.2", "3.1", "3.0", "2.4", "2.3", "2.2", "2.1", "2.0", "1.4", "1.3", "1.2", "1.1", "1.0", "0.13", "0.12", "0.11", "0.10", "0.9", "0.8", "0.7", "0.6", "0.5", "0.4", "0.3", "0.2", "0.1"]
+}
+
+# MODIN
+TEST_MODIN = "python -m pytest -xvs"
+SPECS_MODIN = {
+    k: {
+        "python": "3.12",
+        "install": "python -m pip install -e .",
+        "test_cmd": TEST_MODIN,
+    }
+    for k in ["0.23", "0.22", "0.21", "0.20", "0.19", "0.18", "0.17", "0.16", "0.15", "0.14", "0.13", "0.12", "0.11", "0.10", "0.9", "0.8", "0.7", "0.6", "0.5", "0.4", "0.3", "0.2", "0.1"]
+}
+
+# SPYDER
+TEST_SPYDER = "python -m pytest -xvs"
+SPECS_SPYDER = {
+    k: {
+        "python": "3.12",
+        "install": "python -m pip install -e .",
+        "test_cmd": TEST_SPYDER,
+    }
+    for k in ["5.4", "5.3", "5.2", "5.1", "5.0", "4.2", "4.1", "4.0", "3.3", "3.2", "3.1", "3.0", "2.3", "2.2", "2.1", "2.0", "1.1", "1.0"]
+}
+
+# HYPOTHESIS
+TEST_HYPOTHESIS = "python -m pytest -xvs"
+SPECS_HYPOTHESIS = {
+    k: {
+        "python": "3.12",
+        "install": "python -m pip install -e .",
+        "test_cmd": TEST_HYPOTHESIS,
+    }
+    for k in ["6.82", "6.81", "6.80", "6.79", "6.78", "6.77", "6.76", "6.75", "6.74", "6.73", "6.72", "6.71", "6.70", "6.69", "6.68", "6.67", "6.66", "6.65", "6.64", "6.63", "6.62", "6.61", "6.60", "6.59", "6.58", "6.57", "6.56", "6.55", "6.54", "6.53", "6.52", "6.51", "6.50", "6.49", "6.48", "6.47", "6.46", "6.45", "6.44", "6.43", "6.42", "6.41", "6.40", "6.39", "6.38", "6.37", "6.36", "6.35", "6.34", "6.33", "6.32", "6.31", "6.30", "6.29", "6.28", "6.27", "6.26", "6.25", "6.24", "6.23", "6.22", "6.21", "6.20", "6.19", "6.18", "6.17", "6.16", "6.15", "6.14", "6.13", "6.12", "6.11", "6.10", "6.9", "6.8", "6.7", "6.6", "6.5", "6.4", "6.3", "6.2", "6.1", "6.0", "5.49", "5.48", "5.47", "5.46", "5.45", "5.44", "5.43", "5.42", "5.41", "5.40", "5.39", "5.38", "5.37", "5.36", "5.35", "5.34", "5.33", "5.32", "5.31", "5.30", "5.29", "5.28", "5.27", "5.26", "5.25", "5.24", "5.23", "5.22", "5.21", "5.20", "5.19", "5.18", "5.17", "5.16", "5.15", "5.14", "5.13", "5.12", "5.11", "5.10", "5.9", "5.8", "5.7", "5.6", "5.5", "5.4", "5.3", "5.2", "5.1", "5.0", "4.57", "4.56", "4.55", "4.54", "4.53", "4.52", "4.51", "4.50", "4.49", "4.48", "4.47", "4.46", "4.45", "4.44", "4.43", "4.42", "4.41", "4.40", "4.39", "4.38", "4.37", "4.36", "4.35", "4.34", "4.33", "4.32", "4.31", "4.30", "4.29", "4.28", "4.27", "4.26", "4.25", "4.24", "4.23", "4.22", "4.21", "4.20", "4.19", "4.18", "4.17", "4.16", "4.15", "4.14", "4.13", "4.12", "4.11", "4.10", "4.9", "4.8", "4.7", "4.6", "4.5", "4.4", "4.3", "4.2", "4.1", "4.0", "3.83", "3.82", "3.81", "3.80", "3.79", "3.78", "3.77", "3.76", "3.75", "3.74", "3.73", "3.72", "3.71", "3.70", "3.69", "3.68", "3.67", "3.66", "3.65", "3.64", "3.63", "3.62", "3.61", "3.60", "3.59", "3.58", "3.57", "3.56", "3.55", "3.54", "3.53", "3.52", "3.51", "3.50", "3.49", "3.48", "3.47", "3.46", "3.45", "3.44", "3.43", "3.42", "3.41", "3.40", "3.39", "3.38", "3.37", "3.36", "3.35", "3.34", "3.33", "3.32", "3.31", "3.30", "3.29", "3.28", "3.27", "3.26", "3.25", "3.24", "3.23", "3.22", "3.21", "3.20", "3.19", "3.18", "3.17", "3.16", "3.15", "3.14", "3.13", "3.12", "3.11", "3.10", "3.9", "3.8", "3.7", "3.6", "3.5", "3.4", "3.3", "3.2", "3.1", "3.0", "2.0", "1.19", "1.18", "1.17", "1.16", "1.15", "1.14", "1.13", "1.12", "1.11", "1.10", "1.9", "1.8", "1.7", "1.6", "1.5", "1.4", "1.3", "1.2", "1.1", "1.0", "0.9", "0.8", "0.7", "0.6", "0.5", "0.4", "0.3", "0.2", "0.1"]
+}
+
+# PYDANTIC
+TEST_PYDANTIC = "python -m pytest -xvs"
+SPECS_PYDANTIC = {
+    k: {
+        "python": "3.12",
+        "install": "python -m pip install -e .",
+        "test_cmd": TEST_PYDANTIC,
+    }
+    for k in ["2.4", "2.3", "2.2", "2.1", "2.0", "1.10", "1.9", "1.8", "1.7", "1.6", "1.5", "1.4", "1.3", "1.2", "1.1", "1.0", "0.32", "0.31", "0.30", "0.29", "0.28", "0.27", "0.26", "0.25", "0.24", "0.23", "0.22", "0.21", "0.20", "0.19", "0.18", "0.17", "0.16", "0.15", "0.14", "0.13", "0.12", "0.11", "0.10", "0.9", "0.8", "0.7", "0.6", "0.5", "0.4", "0.3", "0.2", "0.1"]
+}
+
+# PANDAS
+TEST_PANDAS = "python -m pytest -xvs"
+SPECS_PANDAS = {
+    k: {
+        "python": "3.12",
+        "install": "python -m pip install -e .",
+        "test_cmd": TEST_PANDAS,
+    }
+    for k in ["2.0", "1.5", "1.4", "1.3", "1.2", "1.1", "1.0", "0.25", "0.24", "0.23", "0.22", "0.21", "0.20", "0.19", "0.18", "0.17", "0.16", "0.15", "0.14", "0.13", "0.12", "0.11", "0.10", "0.9", "0.8", "0.7", "0.6", "0.5", "0.4", "0.3", "0.2", "0.1"]
+}
+
+# HYDRA
+TEST_HYDRA = "python -m pytest -xvs"
+SPECS_HYDRA = {
+    k: {
+        "python": "3.12",
+        "install": "python -m pip install -e .",
+        "test_cmd": TEST_HYDRA,
+    }
+    for k in ["1.3", "1.2", "1.1", "1.0", "0.11", "0.10", "0.9", "0.8", "0.7", "0.6", "0.5", "0.4", "0.3", "0.2", "0.1"]
+}
+
 # Constants - Task Instance Instllation Environment
 MAP_REPO_VERSION_TO_SPECS_PY = {
     "astropy/astropy": SPECS_ASTROPY,
+    "bokeh/bokeh": SPECS_BOKEH,
+    "conan-io/conan": SPECS_CONAN,
+    "dask/dask": SPECS_DASK,
     "dbt-labs/dbt-core": SPECS_DBT_CORE,
     "django/django": SPECS_DJANGO,
+    "facebookresearch/hydra": SPECS_HYDRA,
+    "getmoto/moto": SPECS_MOTO,
+    "HypothesisWorks/hypothesis": SPECS_HYPOTHESIS,
+    "iterative/dvc": SPECS_DVC,
     "matplotlib/matplotlib": SPECS_MATPLOTLIB,
     "marshmallow-code/marshmallow": SPECS_MARSHMALLOW,
+    "modin-project/modin": SPECS_MODIN,
     "mwaskom/seaborn": SPECS_SEABORN,
     "pallets/flask": SPECS_FLASK,
+    "pandas-dev/pandas": SPECS_PANDAS,
+    "Project-MONAI/MONAI": SPECS_MONAI,
     "psf/requests": SPECS_REQUESTS,
     "pvlib/pvlib-python": SPECS_PVLIB,
+    "pydantic/pydantic": SPECS_PYDANTIC,
     "pydata/xarray": SPECS_XARRAY,
     "pydicom/pydicom": SPECS_PYDICOM,
     "pylint-dev/astroid": SPECS_ASTROID,
     "pylint-dev/pylint": SPECS_PYLINT,
     "pytest-dev/pytest": SPECS_PYTEST,
+    "python/mypy": SPECS_MYPY,
     "pyvista/pyvista": SPECS_PYVISTA,
     "scikit-learn/scikit-learn": SPECS_SKLEARN,
     "sphinx-doc/sphinx": SPECS_SPHINX,
+    "spyder-ide/spyder": SPECS_SPYDER,
     "sqlfluff/sqlfluff": SPECS_SQLFLUFF,
     "swe-bench/humaneval": SPECS_HUMANEVAL,
     "sympy/sympy": SPECS_SYMPY,
